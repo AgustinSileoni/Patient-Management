@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;
 
     @NotNull
     private String name;
@@ -30,11 +30,11 @@ public class Patient {
     @NotNull
     private LocalDate registeredDate;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
