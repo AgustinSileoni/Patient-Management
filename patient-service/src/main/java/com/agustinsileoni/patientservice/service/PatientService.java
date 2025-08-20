@@ -1,5 +1,6 @@
 package com.agustinsileoni.patientservice.service;
 
+import com.agustinsileoni.patientservice.DTO.PatientRequestDTO;
 import com.agustinsileoni.patientservice.DTO.PatientResponseDTO;
 import com.agustinsileoni.patientservice.mapper.PatientMapper;
 import com.agustinsileoni.patientservice.model.Patient;
@@ -17,6 +18,7 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
+
     public void addPatien(Patient patient){
         patientRepository.save(patient);
     }
@@ -25,5 +27,11 @@ public class PatientService {
         List<Patient> patients = patientRepository.findAll();
         List<PatientResponseDTO> patientResponseDTOS = patients.stream().map(PatientMapper::toDTO).toList();
         return patientResponseDTOS;
+    }
+
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+        Patient newPatient = patientRepository.save(
+                PatientMapper.toModel(patientRequestDTO));
+        return PatientMapper.toDTO(newPatient);
     }
 }

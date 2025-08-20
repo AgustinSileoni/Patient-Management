@@ -1,17 +1,33 @@
 package com.agustinsileoni.patientservice.mapper;
 
+import com.agustinsileoni.patientservice.DTO.PatientRequestDTO;
 import com.agustinsileoni.patientservice.DTO.PatientResponseDTO;
 import com.agustinsileoni.patientservice.model.Patient;
+
+import java.time.LocalDate;
 
 public class PatientMapper {
 
     public static PatientResponseDTO toDTO(Patient patient){
-        PatientResponseDTO patienDTO = new PatientResponseDTO();
-        patienDTO.setId(patient.getId());
-        patienDTO.setName(patient.getName());
-        patienDTO.setAddress(patient.getAddress());
-        patienDTO.setEmail(patient.getEmail());
-        patienDTO.setDateOfBirth(patient.getDateOfBirth().toString());
-        return patienDTO;
+        PatientResponseDTO patientDTO = new PatientResponseDTO();
+        patientDTO.setId(patient.getId());
+        patientDTO.setName(patient.getName());
+        patientDTO.setAddress(patient.getAddress());
+        patientDTO.setEmail(patient.getEmail());
+        patientDTO.setDateOfBirth(patient.getDateOfBirth().toString());
+        return patientDTO;
     }
+
+    public static Patient toModel(PatientRequestDTO patientRequestDTO){
+        Patient patient = new Patient();
+        patient.setName(patientRequestDTO.getName());
+        patient.setAddress(patientRequestDTO.getAddress());
+        patient.setEmail(patientRequestDTO.getEmail());
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
+        patient.setRegisteredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate()));
+
+        return patient;
+
+    }
+
 }
